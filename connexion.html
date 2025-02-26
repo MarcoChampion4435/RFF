@@ -49,11 +49,32 @@
 <body>
     <div class="login-container">
         <h2>Connexion</h2>
-        <form>
-            <input type="email" placeholder="Adresse e-mail" required>
-            <input type="password" placeholder="Mot de passe" required>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Adresse e-mail" required>
+            <input type="password" id="password" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            fetch('users.json')
+                .then(response => response.json())
+                .then(users => {
+                    const user = users.find(u => u.email === email && u.password === password);
+                    if (user) {
+                        window.location.href = 'bienvenue.html';
+                    } else {
+                        alert('Email ou mot de passe incorrect.');
+                    }
+                })
+                .catch(error => console.error('Erreur lors de la récupération des utilisateurs:', error));
+        });
+    </script>
+
 </body>
 </html>
