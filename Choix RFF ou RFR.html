@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec des carrés cliquables</title>
+    <style>
+        body {
+            background-color: #90EE90; /* Fond vert clair pomme */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            gap: 2cm; /* Espace de 2 cm entre les carrés */
+        }
+        .square {
+            width: 5cm;
+            height: 5cm;
+            background-color: lightcoral;
+            border-radius: 10px;
+            cursor: pointer; /* Change le curseur pour indiquer que l'élément est cliquable */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajoute une transition pour l'effet */
+        }
+        .square:hover {
+            transform: scale(1.05); /* Agrandit légèrement le carré */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet de relief */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+</body>
+</html>
