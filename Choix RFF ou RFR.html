@@ -24,17 +24,31 @@
             border-radius: 10px;
             cursor: pointer; /* Change le curseur pour indiquer que l'élément est cliquable */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajoute une transition pour l'effet */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .square:hover {
             transform: scale(1.05); /* Agrandit légèrement le carré */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet de relief */
         }
+        .text {
+            font-size: 3rem; /* Taille de texte 3 fois plus grande */
+            font-weight: bold;
+            color: black; /* Changé en noir */
+            text-align: center;
+            font-family: Arial, sans-serif; /* Police Arial */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="square"></div>
-        <div class="square"></div>
+        <div class="square">
+            <span class="text">RFF</span>
+        </div>
+        <div class="square">
+            <span class="text">RFR</span>
+        </div>
     </div>
 </body>
 </html>
