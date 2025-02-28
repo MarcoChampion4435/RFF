@@ -67,7 +67,7 @@
                 .then(users => {
                     const user = users.find(u => u.email === email && u.password === password);
                     if (user) {
-                        window.location.href = 'bienvenue.html';
+                        window.location.href = 'Choix RFF ou RFR.html';
                     } else {
                         alert('Email ou mot de passe incorrect.');
                     }
