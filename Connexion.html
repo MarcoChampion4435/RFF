@@ -17,26 +17,25 @@
         .login-container {
             background-color: white;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 300px; /* Largeur fixe pour le conteneur */
         }
         .login-container h2 {
             margin-bottom: 20px;
         }
-        .login-container input,
-        .login-container button {
+        .login-container input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+            border-radius: 5px;
         }
         .login-container button {
-            background-color: #4CAF50; /* Vert */
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
             border: none;
+            border-radius: 5px;
             color: white;
             font-size: 16px;
             cursor: pointer;
@@ -44,43 +43,39 @@
         .login-container button:hover {
             background-color: #45a049;
         }
-        .error-message {
-            color: red;
-            display: none;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Connexion</h2>
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Adresse e-mail" required>
-            <input type="password" id="password" placeholder="Mot de passe" required>
-            <button type="submit">Se connecter</button>
-            <div id="error-message" class="error-message">Email ou mot de passe incorrect.</div>
-        </form>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Mot de passe" required>
+        <button onclick="login()">Se connecter</button>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+        async function login() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            fetch('users.json')
-                .then(response => response.json())
-                .then(users => {
-                    const user = users.find(u => u.email === email && u.password === password);
-                    if (user) {
-                        window.location.href = 'Choix RFF ou RFR.html';
-                    } else {
-                        document.getElementById('error-message').style.display = 'block';
-                    }
-                })
-                .catch(error => console.error('Erreur lors de la récupération des utilisateurs:', error));
-        });
-    </script>
+            try {
+                const response = await fetch('users.json');
+                const users = await response.json();
 
+                const user = users.find(u => u.email === email && u.password === password);
+
+                if (user) {
+                    // Stocker l'email dans localStorage
+                    localStorage.setItem('userEmail', email);
+                    // Rediriger vers la page "Choix RFF ou RFR.html"
+                    window.location.href = 'Choix RFF ou RFR.html';
+                } else {
+                    alert('Email ou mot de passe incorrect.');
+                }
+            } catch (error) {
+                console.error('Erreur lors de la récupération des utilisateurs:', error);
+            }
+        }
+    </script>
 </body>
 </html>
