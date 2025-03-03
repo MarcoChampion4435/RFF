@@ -17,11 +17,12 @@
         .login-container {
             background-color: white;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centre le texte à l'intérieur du conteneur */
         }
         .login-container h2 {
-            margin-bottom: 20px;
+            margin-top: 0; /* Supprime la marge supérieure pour centrer verticalement */
         }
         .login-container input {
             width: 100%;
@@ -29,6 +30,7 @@
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box; /* Ensure padding is included in the width */
         }
         .login-container button {
             width: 100%;
@@ -39,9 +41,15 @@
             color: white;
             font-size: 16px;
             cursor: pointer;
+            box-sizing: border-box; /* Ensure padding is included in the width */
         }
         .login-container button:hover {
             background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
         }
     </style>
 </head>
@@ -51,12 +59,14 @@
         <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Mot de passe" required>
         <button onclick="login()">Se connecter</button>
+        <div id="error-message" class="error-message"></div>
     </div>
 
     <script>
         async function login() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
 
             try {
                 const response = await fetch('users.json');
@@ -70,7 +80,7 @@
                     // Rediriger vers la page "Choix RFF ou RFR.html"
                     window.location.href = 'Choix RFF ou RFR.html';
                 } else {
-                    alert('Email ou mot de passe incorrect.');
+                    errorMessage.textContent = 'Email ou mot de passe incorrect.';
                 }
             } catch (error) {
                 console.error('Erreur lors de la récupération des utilisateurs:', error);
